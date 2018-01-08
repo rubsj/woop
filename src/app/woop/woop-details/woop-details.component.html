@@ -1,0 +1,29 @@
+<div class="woop item-card mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text" *ngIf="chosenWish.wish; else prompt" >Editing {{originalWish.wish}}</h2>
+    <ng-template class="mdl-card__title-text" #prompt> No Wish Selected</ng-template>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <pre>{{chosenWish | json}}</pre>
+  </div>
+  <div class="mdl-card__supporting-text">
+     <form #deftailForm="ngForm">
+       <div class="mdl-textfield mdl-js-textfield">
+         <label>What is your wish</label>
+         <input class="mdl-textfield__input" type="text" name="wish" placeholder="enter your wish" [(ngModel)]="chosenWish.wish" required>
+       </div>
+
+       <div class="mdl-textfield mdl-js-textfield">
+         <label>What is the outcome</label>
+         <input class="mdl-textfield__input" type="text" name="outcome" placeholder="enter the outcome for wish" [(ngModel)]="chosenWish.outcome">
+       </div>
+     </form>
+  </div>
+
+  <div class="mdl-card__actions">
+    <button type="button" (click)="cancelled.emit(chosenWish)"
+            class="mdl-button mdl-js-button mdl-js-ripple-effect">Cancel</button>
+    <button type="button" (click)="saved.emit(chosenWish)" [disabled]="!deftailForm.valid"
+            class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Save</button>
+  </div>
+</div>

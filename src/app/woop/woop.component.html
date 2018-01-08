@@ -1,0 +1,36 @@
+<!--<h1>{{title}}</h1>
+<hr>
+<div class="mdl-card__title">
+  <h2 class="mdl-card__title-text" *ngIf="selectedWish; else prompt" >{{selectedWish.wish}}</h2>
+  <ng-template class="mdl-card__title-text" #prompt> No Wish Selected</ng-template>
+  </div>
+
+<hr>
+<div class="woop"
+     (click)="selectWish(woop)"
+     *ngFor="let woop of woops">
+  <h3>{{woop.wish}} : {{woop.outcome}}</h3>
+</div>
+<hr>
+
+<pre>{{woops | json}}</pre>
+<hr>-->
+
+
+<div class="mdl-grid items">
+  <div class="mdl-cell mdl-cell--6-col">
+    <app-woop-list [woopList]="woops"
+                   (selected)="selectWish($event)"
+                   (delete)="deleteWish($event)"></app-woop-list>
+
+  </div>
+
+
+  <div class="mdl-cell mdl-cell--6-col">
+       <app-woop-details [selectedWish]="selectedWish"
+                          (saved)="saveWish($event)"
+                          (cancelled)="resetWish($event)"></app-woop-details>
+
+  </div>
+
+</div>
